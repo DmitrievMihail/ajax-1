@@ -1,0 +1,36 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX#0 Homework</title>
+    <link href="mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="mui-container">
+        <form id="form" class="mui-form">
+            <legend>Прогноз погоды</legend>
+            <datalist id="citiesList"></datalist>
+            <div class="mui-textfield mui-textfield--float-label">
+                <input
+                    type="text"
+                    id="city"
+                    list="citiesList"
+                    value="Ярославль"
+                />
+                <label>Город</label>
+            </div>
+            <button
+                type="submit"
+                id="submit"
+                class="mui-btn mui-btn--primary"
+            >
+                Узнать погоду
+            </button>
+        </form>
+
+        <div id="output" class="mui--text-body1"></div>
+    </div>
+    <script src="mui.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

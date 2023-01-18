@@ -1,6 +1,39 @@
 body {
-    padding-top: 2em;
+    padding: 2em;
 }
-.mui-btn {
-    transition: none;
+.inbox, .outbox {
+    background: #EAEAEA;
+    outline: 2px solid #5A5A5A;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #060606;
+    font-size: 30px;
+    margin: 1em;
+    user-select: none;
+}
+.outbox {
+    width: 250px;
+    height: 100px;
+    padding-top: 40px;
+    cursor: pointer;
+}
+.inbox {
+    float: left;
+    width: 500px;
+    height: 150px;
+    padding-top: 120px;
+}
+
+.inbox:hover {
+    background-color: red;
+}
+
+#move{
+    position: absolute;
+    background-color: greenyellow;
+    margin: 0;
+}
+
+.hidden {
+    display: none;
 }

@@ -1,9 +1,7 @@
 body {
     padding: 2em;
 }
-.inbox, .outbox {
-    background: #EAEAEA;
-    outline: 2px solid #5A5A5A;
+.inbox, .outbox, .inbox div {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     color: #060606;
@@ -11,21 +9,50 @@ body {
     margin: 1em;
     user-select: none;
 }
-.outbox {
+.outbox, .inbox div {
     width: 250px;
     height: 100px;
-    padding-top: 40px;
+    outline: 2px solid #5A5A5A;
+    background: #EAEAEA;    
+    padding-top: 40px;    
+}
+.outbox {
     cursor: pointer;
 }
 .inbox {
     float: left;
-    width: 500px;
-    height: 150px;
-    padding-top: 120px;
+    position: relative;
+    border: 1px solid red;
 }
 
-.inbox:hover {
-    background-color: red;
+.inbox, .inbox::before {
+    width: 500px;
+    height: 250px;
+}
+.inbox div {
+    margin:3px;
+    display: inline-block;
+}
+
+.inbox::before {
+    box-sizing: border-box;
+    content: "Тут размещаем по сетке";
+    padding-top: 100px;
+    display: block;
+    outline: 2px solid #5A5A5A;
+    background: #EAEAEA;
+    position: absolute;
+    opacity: 1;
+    z-index: -1;
+}
+
+.inbox.over::before{
+    background: lime;
+    outline: 2px solid green;
+}
+
+#dest2::before {
+    content: "Тут размещаем свободно";    
 }
 
 #move{

@@ -1,20 +1,31 @@
+#dest1::before { /* для установки высоты скриптом должна быть первой строкой */
+    height: 100%;
+}
+#dest2::before {
+    height: 100%;
+    width: 100%;
+}
 body {
-    padding: 2em;
+    padding: 1em;
+    overflow: hidden;
 }
 .inbox, .outbox, .inbox div {
-    text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     color: #060606;
     font-size: 30px;
-    margin: 1em;
     user-select: none;
 }
+.inbox, .outbox {
+    margin: 10px;
+}
+
 .outbox, .inbox div {
-    width: 250px;
-    height: 100px;
+    width: 180px;
+    height: 80px;
     outline: 2px solid #5A5A5A;
     background: #EAEAEA;    
-    padding-top: 40px;    
+    padding-top: 15px;
+    text-align: center;    
 }
 .outbox {
     cursor: pointer;
@@ -22,33 +33,43 @@ body {
 .inbox {
     float: left;
     position: relative;
-    border: 1px solid red;
+    /* outline: 1px solid red; */
+    overflow: auto;
+    height: 310px;
 }
 
 .inbox, .inbox::before {
-    width: 500px;
-    height: 250px;
+    width: 580px;
 }
 .inbox div {
-    margin:3px;
     display: inline-block;
+    position: relative;
+    z-index: -1;
+}
+#dest1 div {
+    margin:3px;
+}
+
+#dest2 div {
+    position: absolute;
 }
 
 .inbox::before {
+    text-align: center;
     box-sizing: border-box;
     content: "Тут размещаем по сетке";
     padding-top: 100px;
     display: block;
-    outline: 2px solid #5A5A5A;
-    background: #EAEAEA;
+    border: 2px solid #5A5A5A;
+    background-color: rgba(0, 0, 0, 0.1);    
     position: absolute;
     opacity: 1;
-    z-index: -1;
-}
+    z-index: -2;
+    width: 100%;
+ }
 
 .inbox.over::before{
     background: lime;
-    outline: 2px solid green;
 }
 
 #dest2::before {

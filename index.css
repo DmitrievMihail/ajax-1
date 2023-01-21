@@ -1,13 +1,5 @@
-#dest1::before { /* для установки высоты скриптом должна быть первой строкой */
-    height: 100%;
-}
-#dest2::before {
-    height: 100%;
-    width: 100%;
-}
 body {
     padding: 1em;
-    overflow: hidden;
 }
 .inbox, .outbox, .inbox div {
     font-family: Arial, Helvetica, sans-serif;
@@ -15,7 +7,7 @@ body {
     font-size: 30px;
     user-select: none;
 }
-.inbox, .outbox {
+.outbox {
     margin: 10px;
 }
 
@@ -23,24 +15,24 @@ body {
     width: 180px;
     height: 80px;
     outline: 2px solid #5A5A5A;
-    background: #EAEAEA;    
+    background: #EAEAEA;
     padding-top: 15px;
     text-align: center;    
 }
 .outbox {
     cursor: pointer;
 }
+.inbox, .wrap::before{
+    height: 310px;
+    width: 580px;
+}
 .inbox {
     float: left;
     position: relative;
     /* outline: 1px solid red; */
     overflow: auto;
-    height: 310px;
 }
 
-.inbox, .inbox::before {
-    width: 580px;
-}
 .inbox div {
     display: inline-block;
     position: relative;
@@ -55,22 +47,12 @@ body {
 }
 
 .inbox::before {
-    text-align: center;
-    box-sizing: border-box;
     content: "Тут размещаем по сетке";
     padding-top: 100px;
-    display: block;
-    border: 2px solid #5A5A5A;
-    background-color: rgba(0, 0, 0, 0.1);    
+    padding-left:100px;
     position: absolute;
-    opacity: 1;
-    z-index: -2;
-    width: 100%;
+    z-index: -1;
  }
-
-.inbox.over::before{
-    background: lime;
-}
 
 #dest2::before {
     content: "Тут размещаем свободно";    
@@ -78,10 +60,29 @@ body {
 
 #move{
     position: absolute;
-    background-color: greenyellow;
     margin: 0;
 }
 
 .hidden {
     display: none;
+}
+
+.wrap{
+    margin: 10px;
+    border:2px solid black;
+    display: inline-block;
+}
+
+.wrap::before{
+    display: block;
+    content: " ";
+    background-color: red;
+    display: inline-block;
+    z-index: -1;
+    position: absolute;
+    background: #EAEAEA;
+}
+
+.wrap.over::before{
+    background: lime;
 }

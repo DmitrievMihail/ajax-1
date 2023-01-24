@@ -1,7 +1,3 @@
-const debug = true;
-const debugHTML = document.getElementById('debugHTML');
-const debugCoords = document.getElementById('debugCoords');
-
 const source = document.getElementById('source');
 const move = document.getElementById('move');
 const dest1 = document.getElementById('dest1');
@@ -12,21 +8,12 @@ let blockOver = 0; // Номеб блока в который кидаем
 let posX = 0; // Позиция начального смещения по X и Y
 let posY = 0;
 
-function deb() {
-    if (debug) {
-        // eslint-disable-next-line prefer-template, prefer-rest-params
-        debugHTML.innerHTML += Array.prototype.slice.call(arguments).join('\t') + '\n';
-    }
-}
-
 // Событие-перемещалка (на body, потому что ездить может везде, даже за экраном)
 const moveListener = function (event) {
     // eslint-disable-next-line no-use-before-define
     !event.pressure && dropListener(event); // если отпустили за экраном
     move.style.left = `${event.pageX - posX}px`;
     move.style.top = `${event.pageY - posY}px`;
-    // eslint-disable-next-line prefer-template
-    debugCoords.value = move.style.left + ', ' + move.style.top;
 };
 
 const destListener = function (event) {
@@ -43,7 +30,6 @@ const destListener = function (event) {
             document.getElementById('dest2').parentElement.classList.add('over');
         }
     }
-    debug && deb(event.type, event.target, blockOver);
 };
 
 // Событие хватание блока
@@ -60,7 +46,6 @@ source.addEventListener('pointerdown', (event) => {
     })`;
     move.style.backgroundColor = randColor;
     move.classList.remove('hidden');
-    debug && console.log('Схватили:', event.pageX, event.pageY, randColor);
 
     document.body.addEventListener('pointermove', moveListener); // Движение
     // контроль попадания
@@ -72,11 +57,8 @@ source.addEventListener('pointerdown', (event) => {
 
 // Событие при опускании
 const dropListener = function (event) {
-    debug && console.log('Кинули');
     // Скрыли таскалку
     move.classList.add('hidden');
-    deb('Кинули', event.pageX, event.pageY);
-    console.log(event.target);
 
     // перемещение
     document.body.removeEventListener('pointermove', moveListener);
@@ -85,11 +67,9 @@ const dropListener = function (event) {
     dest2.removeEventListener('pointerover', destListener);
     dest1.removeEventListener('pointerout', destListener); // Снятие
     dest2.removeEventListener('pointerout', destListener);
-    debug && console.log('Кинули: ', event.pageX, event.pageY);
 
     let offsetX = 0;
     let offsetY = 0;
-
     if (event.target.id === 'source') {
         // Это условие ТОЛЬКО для мобильного
         const elem = document.elementFromPoint(event.clientX, event.clientY); // Элемент на котором кликнули
@@ -100,16 +80,13 @@ const dropListener = function (event) {
         if (elem.id === 'dest2') {
             blockOver = 2;
             const bounds = elem.getBoundingClientRect();
-            console.log(bounds);
-            offsetX = bounds.x - 16;
-            offsetY = bounds.y - 16;
+            offsetX = bounds.x;
+            offsetY = bounds.y;
         }
-        // console.log(document.elementFromPoint(event.clientX, event.clientY));
     }
     if (blockOver) {
         const blockTarget = blockOver === 1 ? dest1 : dest2;
         blockTarget.parentElement.classList.remove('over');
-        debug && console.log('Попали: ', blockTarget.parentElement);
 
         const elem = document.createElement('div'); // элемент для вставки
         // eslint-disable-next-line no-plusplus
@@ -126,8 +103,6 @@ const dropListener = function (event) {
             const deltaLeft = left < 0 ? -left : 0;
             left = left < 0 ? 0 : left;
 
-            deb(top, deltaTop, left, deltaLeft);
-
             if (deltaTop + deltaLeft) {
                 // Если вылезли за левый верхний край, то двигаем ВСЕ внутренние блоки на дельту вправо-вниз
                 for (const block of dest2.children) {
@@ -137,7 +112,6 @@ const dropListener = function (event) {
                 dest2.scrollTop = parseInt(dest2.scrollTop, 10) + deltaTop + 'px';
                 dest2.scrollLeft = parseInt(dest2.scrollLeft, 10) + deltaLeft + 'px';
             }
-            deb(top, deltaTop, left, deltaLeft);
             elem.style.top = `${top}px`;
             elem.style.left = `${left}px`;
         }

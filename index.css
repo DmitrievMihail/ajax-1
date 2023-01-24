@@ -1,7 +1,6 @@
 body {
     padding: 16px;
     touch-action: none;
-    position: absolute;
 }
 .inbox, .outbox, .inbox div {
     font-family: Arial, Helvetica, sans-serif;

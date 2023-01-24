@@ -105,8 +105,8 @@ source.addEventListener('pointerdown', (event) => {
     // offsetX offsetY - относительные координаты клика внутри блока
     posX = event.offsetX;
     posY = event.offsetY;
-    move.style.left = `${event.pageX - event.offsetX}px`;
-    move.style.top = `${event.pageY - event.offsetY}px`;
+    move.style.left = event.pageX - event.offsetX + 'px';
+    move.style.top = event.pageY - event.offsetY + 'px';
     // Светлый цвет
     const randColor = `rgb(${128 + parseInt(128 * Math.random(), 10)},${128 + parseInt(128 * Math.random(), 10)},${
         128 + parseInt(128 * Math.random(), 10)

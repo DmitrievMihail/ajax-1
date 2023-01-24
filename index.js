@@ -32,29 +32,6 @@ const destListener = function (event) {
     }
 };
 
-// Событие хватание блока
-source.addEventListener('pointerdown', (event) => {
-    // pageX pageY - абсолютные координаты блока
-    // offsetX offsetY - относительные координаты клика внутри блока
-    posX = event.offsetX;
-    posY = event.offsetY;
-    move.style.left = `${event.pageX - event.offsetX}px`;
-    move.style.top = `${event.pageY - event.offsetY}px`;
-    // Светлый цвет
-    const randColor = `rgb(${128 + parseInt(128 * Math.random(), 10)},${128 + parseInt(128 * Math.random(), 10)},${
-        128 + parseInt(128 * Math.random(), 10)
-    })`;
-    move.style.backgroundColor = randColor;
-    move.classList.remove('hidden');
-
-    document.body.addEventListener('pointermove', moveListener); // Движение
-    // контроль попадания
-    dest1.addEventListener('pointerover', destListener); // Наведение
-    dest2.addEventListener('pointerover', destListener);
-    dest1.addEventListener('pointerout', destListener); // Снятие
-    dest2.addEventListener('pointerout', destListener);
-});
-
 // Событие при опускании
 const dropListener = function (event) {
     // Скрыли таскалку
@@ -67,6 +44,9 @@ const dropListener = function (event) {
     dest2.removeEventListener('pointerover', destListener);
     dest1.removeEventListener('pointerout', destListener); // Снятие
     dest2.removeEventListener('pointerout', destListener);
+
+    move.removeEventListener('pointerup', dropListener); // для десктопа
+    document.body.removeEventListener('pointerup', dropListener); // для мобилы
 
     let offsetX = 0;
     let offsetY = 0;
@@ -119,6 +99,28 @@ const dropListener = function (event) {
     }
 };
 
-// Отпустить (событие постоянно висит)
-move.addEventListener('pointerup', dropListener);
-document.body.addEventListener('pointerup', dropListener);
+// Событие хватание блока
+source.addEventListener('pointerdown', (event) => {
+    // pageX pageY - абсолютные координаты блока
+    // offsetX offsetY - относительные координаты клика внутри блока
+    posX = event.offsetX;
+    posY = event.offsetY;
+    move.style.left = `${event.pageX - event.offsetX}px`;
+    move.style.top = `${event.pageY - event.offsetY}px`;
+    // Светлый цвет
+    const randColor = `rgb(${128 + parseInt(128 * Math.random(), 10)},${128 + parseInt(128 * Math.random(), 10)},${
+        128 + parseInt(128 * Math.random(), 10)
+    })`;
+    move.style.backgroundColor = randColor;
+    move.classList.remove('hidden');
+
+    document.body.addEventListener('pointermove', moveListener); // Движение
+    // контроль попадания
+    dest1.addEventListener('pointerover', destListener); // Наведение
+    dest2.addEventListener('pointerover', destListener);
+    dest1.addEventListener('pointerout', destListener); // Снятие
+    dest2.addEventListener('pointerout', destListener);
+
+    move.addEventListener('pointerup', dropListener); // для десктопа
+    document.body.addEventListener('pointerup', dropListener); // для мобилы
+});

@@ -1,11 +1,14 @@
 body {
-    padding: 1em;
+    padding: 16px;
+    touch-action: none;
+    position: absolute;
 }
 .inbox, .outbox, .inbox div {
     font-family: Arial, Helvetica, sans-serif;
     color: #060606;
-    font-size: 30px;
+    font-size: 28px;
     user-select: none;
+    touch-action: none;
 }
 .outbox {
     margin: 10px;
@@ -29,7 +32,6 @@ body {
 .inbox {
     float: left;
     position: relative;
-    /* outline: 1px solid red; */
     overflow: auto;
 }
 
@@ -61,6 +63,7 @@ body {
 #move{
     position: absolute;
     margin: 0;
+    touch-action: none;
 }
 
 .hidden {
@@ -85,4 +88,12 @@ body {
 
 .wrap.over::before{
     background: lime;
+}
+
+#debugHTML{
+    width: 100%;
+    height: 300px;
+}
+#debugCoords {
+    text-align: center;
 }

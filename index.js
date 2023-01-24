@@ -76,12 +76,12 @@ const dropListener = function (event) {
 
         if (blockTarget === dest2) {
             // определяем относительные координаты top = y, left = x, если координаты отрицательные то зануляем их, а отрицательность превращаем в дельту
-            let top = dest2.scrollTop + event.layerY - posY - offsetY; // Отступ сверху
-            const deltaTop = top < 0 ? -top : 0;
-            top = top < 0 ? 0 : top;
             let left = dest2.scrollLeft + event.layerX - posX - offsetX; // Отступ слева
             const deltaLeft = left < 0 ? -left : 0;
             left = left < 0 ? 0 : left;
+            let top = dest2.scrollTop + event.layerY - posY - offsetY; // Отступ сверху
+            const deltaTop = top < 0 ? -top : 0;
+            top = top < 0 ? 0 : top;
 
             if (deltaTop + deltaLeft) {
                 // Если вылезли за левый верхний край, то двигаем ВСЕ внутренние блоки на дельту вправо-вниз
